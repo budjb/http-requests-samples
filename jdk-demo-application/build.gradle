@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        maven { setUrl('http://repo.spring.io/plugins-release') }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.budjb.httprequests.sample.jdk'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencyManagement {
+    imports { mavenBom "com.budjb:http-requests-bom:2.0.0" }
+}
+
+dependencies {
+    compile('com.budjb:http-requests-httpcomponents-client')
+    compile('com.budjb:http-requests-jackson')
+}
+
+mainClassName='com.budjb.httprequests.sample.jdk.JdkApplication'
